@@ -1,9 +1,12 @@
-import {View, Text, StyleSheet, Pressable} from 'react-native';
+import {View, Text, StyleSheet, Pressable, Platform} from 'react-native';
 
 import Colors from '../../general/constants/Colors';
 import Styles from '../../general/constants/Styles';
 import GeneralIonicons from '../../general/components/GeneralIonicons';
 import GeneralMaterialIcons from '../../general/components/GeneralMaterialIcons';
+import MontserratText from '../../../fonts/MontserratText';
+import PlusJakartaSansText from '../../../fonts/PlusJakartaSansText';
+import PoppinsText from '../../../fonts/PoppinsText';
 
 function EOHomeButton({
   title,
@@ -26,23 +29,20 @@ function EOHomeButton({
         containerStyle,
         pressed && Styles.pressed,
       ]}>
-      {ionicon && (
-        <GeneralIonicons
-          name={name ? name : 'person-circle'}
-          size={size ? size : 24}
-          color={color ? color : 'white'}
-        />
-      )}
-      {materialIcon && (
-        <GeneralMaterialIcons
-          name={name ? name : 'account-circle'}
-          size={size ? size : 24}
-          color={color ? color : 'white'}
-        />
-      )}
-      <Text style={[styles.buttonText, textStyle]}>
+      <GeneralMaterialIcons
+        name={name ? name : 'account-circle'}
+        size={size ? size : 24}
+        color={outline ? Colors.EOPrimary : 'white'}
+      />
+      <PoppinsText
+        weight="Bold"
+        style={[
+          styles.buttonText,
+          outline && {color: Colors.EOPrimary},
+          textStyle,
+        ]}>
         {title ? title : 'Title'}
-      </Text>
+      </PoppinsText>
     </Pressable>
   );
 }
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     padding: 12,
     borderRadius: 12,
-    backgroundColor: Colors.primaryColor,
+    backgroundColor: Colors.EOPrimary,
   },
   buttonContainerOutline: {
     flexDirection: 'row',
@@ -71,13 +71,13 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: Colors.primaryColor,
+    borderColor: Colors.EOPrimary,
     backgroundColor: 'white',
   },
   buttonText: {
-    fontWeight: 'bold',
     fontSize: 24,
     color: 'white',
     marginLeft: 12,
+    marginBottom: Platform.OS === 'ios' ? 0 : -4,
   },
 });

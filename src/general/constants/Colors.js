@@ -7,13 +7,29 @@ export default {
   secondaryColor: '#B0C486',
   redAccent: '#C72E2E',
   splash: '#504399',
+  primaryGray: '#838496',
 
-  CAMPrimary: '#ef8325',
-  TARAPrimary: '#7975FC',
-  EOPrimary: '#7CAA2D',
   ReservasiMobilePrimary: '#ba3045',
   ChatbotPrimary: '#541f19',
   SOPrimary: '#443CDA',
   MakanSiangPrimary: '#f5d05f',
+
+  //CAM
+  //CAMPrimary: "#afd5e3",
+  CAMPrimary: '#A3D9EC',
+  CAMGreen: '#45c490',
+  CAMRed: '#c95b75',
+  CAMOrange: '#eb8060',
+  CAMDarkerBlue: '#5590A6',
+
+  //TARA
+  TARAPrimary: '#424496',
+
+  //EO
+  EOPrimary: '#4A9877',
+  EOPrimary100: '#84BFA6',
+  EOPrimary200: '#265C45',
+  EOPrimary300: '#334F43',
+  EORed: '#AF2A2A',
 };
 //bccf93

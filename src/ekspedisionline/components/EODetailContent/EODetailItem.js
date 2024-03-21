@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Dimensions} from 'react-native';
+import {View, Text, StyleSheet, Dimensions, Platform} from 'react-native';
 
 import Colors from '../../../general/constants/Colors';
 import Styles from '../../../general/constants/Styles';
@@ -8,6 +8,7 @@ import {
   GetFormattedHourEO,
 } from '../../utils/EOHelperMethods';
 import {MaterialIcons} from '../../../general/components/GeneralComponents';
+import PoppinsText from '../../../../fonts/PoppinsText';
 
 const dimensionWidth = Dimensions.get('window').width;
 
@@ -29,10 +30,12 @@ function EODetailItem({
     <View style={styles.container}>
       <View style={styles.dateCard}>
         <View style={[styles.dateCardIn, Styles.shadow]}>
-          <Text style={[styles.dateText, {marginBottom: 2, fontWeight: '800'}]}>
+          <PoppinsText
+            weight="SemiBold"
+            style={[styles.dateText, {marginBottom: 0}]}>
             {date}
-          </Text>
-          <Text style={styles.dateText}>{hour}</Text>
+          </PoppinsText>
+          <PoppinsText style={styles.dateText}>{hour}</PoppinsText>
         </View>
       </View>
 
@@ -40,9 +43,12 @@ function EODetailItem({
         <View
           style={[
             styles.timelinePoint,
-            itemIndex == 0 && maxIndex > 0 && {backgroundColor: 'green'},
-            itemIndex == maxIndex && maxIndex > 0 && {backgroundColor: 'blue'},
-            itemIndex == 0 && maxIndex == 0 && {backgroundColor: 'red'},
+            itemIndex == 0 &&
+              maxIndex > 0 && {backgroundColor: Colors.EOPrimary200},
+            itemIndex == maxIndex &&
+              maxIndex > 0 && {backgroundColor: Colors.EOPrimary100},
+            itemIndex == 0 &&
+              maxIndex == 0 && {backgroundColor: Colors.EOPrimary},
           ]}></View>
         {parseInt(itemIndex) < maxIndex && (
           <View style={styles.timelineLine}></View>
@@ -51,11 +57,14 @@ function EODetailItem({
 
       <View style={styles.detailCard}>
         <View style={[styles.detailCardIn, Styles.shadow]}>
-          <Text
-            style={[styles.detailText, {fontWeight: '800', marginBottom: 2}]}>
+          <PoppinsText
+            weight="SemiBold"
+            style={[styles.detailText, {marginBottom: 0}]}>
             {Status}
-          </Text>
-          <Text style={styles.detailText}>{DetailStatus}</Text>
+          </PoppinsText>
+          <PoppinsText style={[styles.detailText, {fontSize: 12}]}>
+            {DetailStatus}
+          </PoppinsText>
         </View>
       </View>
     </View>
@@ -79,17 +88,17 @@ const styles = StyleSheet.create({
   },
   dateCardIn: {
     width: '100%',
-    backgroundColor: Colors.primaryColor,
+    backgroundColor: Colors.EOPrimary,
     borderRadius: 8,
     paddingVertical: 6,
     paddingHorizontal: 4,
     alignItems: 'center',
   },
   dateText: {
-    fontWeight: '500',
     fontSize: 12,
     color: 'white',
     textAlign: 'center',
+    marginBottom: Platform.OS === 'ios' ? 0 : -3,
   },
   timelineCard: {
     width: '10%',
@@ -100,13 +109,13 @@ const styles = StyleSheet.create({
     width: '35%',
     height: 'auto',
     aspectRatio: 1,
-    backgroundColor: Colors.primaryColor,
+    backgroundColor: Colors.EOPrimary,
     borderRadius: 100,
   },
   timelineLine: {
     flex: 1,
     width: '7%',
-    backgroundColor: Colors.primaryColor50,
+    backgroundColor: Colors.EOPrimary100,
   },
   detailCard: {
     width: '68%',
@@ -120,6 +129,7 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   detailText: {
-    color: Colors.primaryColor,
+    color: Colors.EOPrimary,
+    marginBottom: Platform.OS === 'ios' ? 0 : -3,
   },
 });

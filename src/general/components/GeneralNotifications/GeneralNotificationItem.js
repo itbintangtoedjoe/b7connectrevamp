@@ -1,39 +1,92 @@
+import React from 'react';
 import {View, Text, StyleSheet, Pressable, Dimensions} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 import Colors from '../../constants/Colors';
 import Styles from '../../constants/Styles';
 import * as Helper from '../../utils/HelperMethods';
+import {SetNotificationIsRead} from '../../utils/APIMethods';
+import PlusJakartaSansText from '../../../../fonts/PlusJakartaSansText';
+import PoppinsText from '../../../../fonts/PoppinsText';
 
 const DimensionWidth = Dimensions.get('window').width;
 
-function GeneralNotificationItem({Title, TransactionID, CreationDate}) {
-  const navigation = useNavigation();
-  const tes = '05-12-2023 11:41';
-  const date = Helper.GetFormattedDateCAM(CreationDate);
-  const hour = CreationDate.split(' ')[1];
+const GeneralNotificationItem = React.memo(
+  ({
+    RecordID,
+    Title,
+    Body,
+    CreationDate,
+    UrlMobileRoute,
+    TransactionID,
+    IsRead,
+  }) => {
+    const navigation = useNavigation();
 
-  return (
-    <Pressable
-      style={({pressed}) => [
-        styles.notificationContainer,
-        Styles.shadow,
-        pressed && Styles.pressed,
-      ]}>
-      <View style={styles.contentContainer}>
-        <Text style={styles.titleText}>{Title}</Text>
-        <Text style={styles.contentText}>
-          Transaksi Anda dengan ID Transaksi: {TransactionID} telah Full
-          Approved
-        </Text>
-        <View style={styles.dateContainer}>
-          <Text style={styles.dateText}>{date}</Text>
-          <Text style={styles.dateText}>{hour}</Text>
+    const date = Helper.GetFormattedDateCAM(CreationDate);
+    const hour = CreationDate.split(' ')[1];
+
+    async function pressHandler() {
+      if (!IsRead) {
+        const response = await SetNotificationIsRead(RecordID);
+      }
+
+      if (UrlMobileRoute === 'EODeliveryTimeline') {
+        navigation.navigate('EO', {
+          screen: 'EODetail',
+          params: {
+            id: TransactionID,
+          },
+        });
+      } else if (UrlMobileRoute === 'CAMDetail') {
+        navigation.navigate('CAM', {
+          screen: 'CAMDetail',
+          params: {
+            id: TransactionID,
+          },
+        });
+      } else if (UrlMobileRoute === 'CAMHome') {
+        navigation.navigate('CAM', {
+          screen: 'CAMHome',
+          params: {
+            id: TransactionID,
+          },
+        });
+      }
+    }
+
+    return (
+      <Pressable
+        onPress={pressHandler}
+        style={({pressed}) => [
+          styles.notificationContainer,
+          //!IsRead && styles.isReadContainer,
+          Styles.shadow,
+          pressed && Styles.pressed,
+        ]}>
+        <View style={styles.contentContainer}>
+          <View style={styles.titleContainer}>
+            <PoppinsText
+              weight={IsRead ? 'Medium' : 'Bold'}
+              style={styles.titleText}>
+              {Title}
+            </PoppinsText>
+            {!IsRead && <View style={styles.unreadDot}></View>}
+          </View>
+          <PoppinsText style={styles.contentText}>{Body}</PoppinsText>
+          <View style={styles.dateContainer}>
+            <PoppinsText weight="SemiBold" style={styles.dateText}>
+              {date}
+            </PoppinsText>
+            <PoppinsText weight="SemiBold" style={styles.dateText}>
+              {hour}
+            </PoppinsText>
+          </View>
         </View>
-      </View>
-    </Pressable>
-  );
-}
+      </Pressable>
+    );
+  },
+);
 
 export default GeneralNotificationItem;
 
@@ -47,20 +100,30 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     backgroundColor: 'white',
   },
+  isReadContainer: {
+    borderWidth: 2,
+    borderColor: Colors.primaryColor50,
+  },
   contentContainer: {
     width: '100%',
   },
+  titleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   titleText: {
     fontSize: 16,
-    flexWrap: 'wrap',
-    fontWeight: 'bold',
     color: Colors.primaryColor,
+    flex: 1,
+    flexWrap: 'wrap',
+    marginBottom: Platform.OS === 'ios' ? 0 : -4,
   },
   contentText: {
     flexWrap: 'wrap',
-    textAlign: 'justify',
+    //textAlign: "justify",
     color: 'black',
-    marginVertical: 8,
+    marginVertical: 6,
   },
   dateContainer: {
     flexDirection: 'row',
@@ -68,8 +131,14 @@ const styles = StyleSheet.create({
   },
   dateText: {
     flexWrap: 'wrap',
-    fontWeight: 'bold',
     fontSize: 12,
-    color: 'black',
+    //color: "black",
+    marginBottom: Platform.OS === 'ios' ? 0 : -4,
+  },
+  unreadDot: {
+    width: 10,
+    height: 10,
+    borderRadius: 100,
+    backgroundColor: Colors.redAccent,
   },
 });

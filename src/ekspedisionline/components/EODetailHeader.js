@@ -1,27 +1,33 @@
 import React from 'react';
-import {View, Text, StyleSheet, Dimensions} from 'react-native';
+import {View, Text, StyleSheet, Dimensions, Platform} from 'react-native';
 
 import Colors from '../../general/constants/Colors';
 import Styles from '../../general/constants/Styles';
+import GeneralLoadingOverlay from '../../general/components/GeneralLoadingOverlay';
+import PoppinsText from '../../../fonts/PoppinsText';
 
 const dimensionWidth = Dimensions.get('window').width;
 
-function EODetailHeader({ResiBarang, Status}) {
-  return (
-    <View style={[styles.topCardContainer, Styles.shadow]}>
+function EODetailHeader({isLoading, ResiBarang, Status}) {
+  let content = (
+    <>
       <View style={styles.contentContainer}>
-        <Text style={[styles.titleText, {fontWeight: '700'}]}>
+        <PoppinsText weight="Bold" style={styles.titleText}>
           Resi Pengiriman
-        </Text>
-        <Text style={[styles.titleText, {fontWeight: '400'}]}>
-          {ResiBarang}
-        </Text>
+        </PoppinsText>
+        <PoppinsText style={styles.titleText}>{ResiBarang}</PoppinsText>
       </View>
       <View style={styles.contentContainer}>
-        <Text style={[styles.titleText, {fontWeight: '700'}]}>Status</Text>
-        <Text style={[styles.titleText, {fontWeight: '400'}]}>{Status}</Text>
+        <PoppinsText weight="Bold" style={styles.titleText}>
+          Status
+        </PoppinsText>
+        <PoppinsText style={styles.titleText}>{Status}</PoppinsText>
       </View>
-    </View>
+    </>
+  );
+
+  return (
+    <View style={[styles.topCardContainer, Styles.shadow]}>{content}</View>
   );
 }
 
@@ -34,7 +40,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 16,
     borderRadius: 12,
-    backgroundColor: Colors.primaryColor,
+    backgroundColor: Colors.EOPrimary,
   },
   contentContainer: {
     marginVertical: 4,
@@ -42,8 +48,15 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 16,
     color: 'white',
+    marginBottom: Platform.OS === 'ios' ? 0 : -4,
   },
   detailText: {
     color: 'black',
+  },
+  loadingContainer: {
+    width: '100%',
+    height: 125,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

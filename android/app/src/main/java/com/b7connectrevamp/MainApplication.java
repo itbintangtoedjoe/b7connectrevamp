@@ -1,4 +1,4 @@
-package com.b7connectrevamp;
+package com.b7.b7connect;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
@@ -9,6 +9,8 @@ import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.facebook.soloader.SoLoader;
 import java.util.List;
+//Added
+import com.wix.reactnativenotifications.RNNotificationsPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 

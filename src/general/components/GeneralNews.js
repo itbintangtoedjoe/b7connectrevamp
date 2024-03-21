@@ -1,15 +1,24 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Dimensions, Platform} from 'react-native';
 import GeneralNewsList from './GeneralNews/GeneralNewsList';
 import GeneralIonicons from './GeneralIonicons';
+import PlusJakartaSansText from '../../../fonts/PlusJakartaSansText';
+import PoppinsText from '../../../fonts/PoppinsText';
+import GeneralLoadingOverlay from './GeneralLoadingOverlay';
 
-function GeneralNews() {
+const dimensionWidth = Dimensions.get('window').width;
+
+function GeneralNews({data}) {
   return (
     <View style={styles.newsContainer}>
       <View style={styles.titleContainer}>
-        <Text style={styles.titleText}>News & Event</Text>
-        <Text style={styles.swipeText}>{`See more >`}</Text>
+        <PoppinsText weight="Bold" style={styles.titleText}>
+          News & Events
+        </PoppinsText>
+        <PoppinsText
+          weight="Medium"
+          style={styles.swipeText}>{`Swipe for more >>`}</PoppinsText>
       </View>
-      <GeneralNewsList />
+      <GeneralNewsList data={data} />
     </View>
   );
 }
@@ -28,11 +37,11 @@ const styles = StyleSheet.create({
   },
   titleText: {
     color: 'black',
-    fontWeight: 'bold',
     fontSize: 18,
+    marginBottom: Platform.OS === 'ios' ? 0 : -8,
   },
   swipeText: {
     color: 'grey',
-    fontWeight: 'bold',
+    marginBottom: Platform.OS === 'ios' ? 0 : -6,
   },
 });

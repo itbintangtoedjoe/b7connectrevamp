@@ -1,8 +1,17 @@
 import React from 'react';
-import {View, Text, StyleSheet, Pressable, Dimensions} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  Dimensions,
+  Platform,
+} from 'react-native';
 
 import Colors from '../../general/constants/Colors';
 import Styles from '../../general/constants/Styles';
+import PlusJakartaSansText from '../../../fonts/PlusJakartaSansText';
+import PoppinsText from '../../../fonts/PoppinsText';
 
 const dimensionWidth = Dimensions.get('window').width;
 
@@ -20,7 +29,9 @@ function EODatePicker({
           styles.fromDateContainer,
           pressed && Styles.pressed,
         ]}>
-        <Text style={styles.fromDateText}>{formattedFromDate}</Text>
+        <PoppinsText weight="Bold" style={styles.fromDateText}>
+          {formattedFromDate}
+        </PoppinsText>
       </Pressable>
       <View style={styles.dateDividerContainer}></View>
       <Pressable
@@ -29,7 +40,9 @@ function EODatePicker({
           styles.toDateContainer,
           pressed && Styles.pressed,
         ]}>
-        <Text style={styles.toDateText}>{formattedToDate}</Text>
+        <PoppinsText weight="Bold" style={styles.toDateText}>
+          {formattedToDate}
+        </PoppinsText>
       </Pressable>
     </View>
   );
@@ -54,7 +67,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 20,
     backgroundColor: 'white',
-    borderColor: Colors.primaryColor,
+    borderColor: Colors.EOPrimary,
   },
   toDateContainer: {
     height: '100%',
@@ -63,23 +76,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 2,
     borderRadius: 20,
-    backgroundColor: Colors.primaryColor,
-    borderColor: Colors.primaryColor,
+    backgroundColor: Colors.EOPrimary,
+    borderColor: Colors.EOPrimary,
   },
   fromDateText: {
-    fontWeight: '800',
     fontSize: 12,
-    color: Colors.primaryColor,
+    color: Colors.EOPrimary,
+    marginBottom: Platform.OS === 'ios' ? 0 : -4,
   },
   toDateText: {
-    fontWeight: '800',
     fontSize: 12,
     color: 'white',
+    marginBottom: Platform.OS === 'ios' ? 0 : -4,
   },
   dateDividerContainer: {
     width: '5%',
     height: 4,
-    backgroundColor: Colors.primaryColor,
+    backgroundColor: Colors.EOPrimary,
     borderRadius: 100,
   },
 });

@@ -1,6 +1,8 @@
-import {StyleSheet, Text, View, Pressable} from 'react-native';
+import {StyleSheet, Text, View, Pressable, Platform} from 'react-native';
 
 import Colors from '../constants/Colors';
+import PlusJakartaSansText from '../../../fonts/PlusJakartaSansText';
+import PoppinsText from '../../../fonts/PoppinsText';
 
 function GeneralButtonOutline({onPress, buttonStyle, textStyle, children}) {
   return (
@@ -11,9 +13,9 @@ function GeneralButtonOutline({onPress, buttonStyle, textStyle, children}) {
         buttonStyle,
       ]}
       onPress={onPress}>
-      <View>
-        <Text style={[styles.buttonText, textStyle]}>{children}</Text>
-      </View>
+      <PoppinsText weight="SemiBold" style={[styles.buttonText, textStyle]}>
+        {children}
+      </PoppinsText>
     </Pressable>
   );
 }
@@ -36,8 +38,8 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   buttonText: {
-    fontWeight: 'bold',
     color: Colors.primaryColor,
     fontSize: 16,
+    marginBottom: Platform.OS === 'ios' ? 0 : -4,
   },
 });

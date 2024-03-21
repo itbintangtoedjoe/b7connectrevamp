@@ -1,10 +1,13 @@
-import {StyleSheet, ImageBackground} from 'react-native';
+import {StyleSheet, ImageBackground, Dimensions} from 'react-native';
 import Colors from '../constants/Colors';
 
-function GeneralBackground({children, containerStyle}) {
+const dimensionWidth = Dimensions.get('window').width;
+const dimensionHeight = Dimensions.get('window').height;
+
+function GeneralBackground({children, containerStyle, bg}) {
   return (
     <ImageBackground
-      source={require('../assets/background.png')}
+      source={bg ? bg : require('../assets/background.png')}
       resizeMode="cover"
       style={[styles.imageBackground, containerStyle]}>
       {children}
@@ -19,6 +22,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 12,
   },
 });

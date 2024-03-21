@@ -1,12 +1,20 @@
 import {StyleSheet, Text, Pressable} from 'react-native';
-import Colors from '../constants/Colors';
 
-function GeneralPressableText({children, onPress, textStyle}) {
+import Colors from '../constants/Colors';
+import Styles from '../constants/Styles';
+import PlusJakartaSansText from '../../../fonts/PlusJakartaSansText';
+import PoppinsText from '../../../fonts/PoppinsText';
+
+function GeneralPressableText({children, onPress, textStyle, textWeight}) {
   return (
     <Pressable
-      style={({pressed}) => pressed && styles.pressed}
+      style={({pressed}) => pressed && Styles.pressed}
       onPress={onPress}>
-      <Text style={[styles.pressableText, textStyle]}>{children}</Text>
+      <PoppinsText
+        weight={textWeight ? textWeight : 'SemiBold'}
+        style={[styles.pressableText, textStyle]}>
+        {children}
+      </PoppinsText>
     </Pressable>
   );
 }
@@ -14,9 +22,6 @@ function GeneralPressableText({children, onPress, textStyle}) {
 export default GeneralPressableText;
 
 const styles = StyleSheet.create({
-  pressed: {
-    opacity: 0.7,
-  },
   pressableText: {
     color: Colors.primaryColor,
   },

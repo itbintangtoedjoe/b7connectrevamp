@@ -1,8 +1,17 @@
 import React from 'react';
-import {View, Text, StyleSheet, StatusBar, SafeAreaView} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  StatusBar,
+  SafeAreaView,
+  Dimensions,
+  Platform,
+} from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 import DatePicker from 'react-native-date-picker';
 
+import Colors from '../../general/constants/Colors';
 import * as GeneralComponents from '../../general/components/GeneralComponents';
 import * as EOComponents from '../components/EOComponents';
 import {getHistoryEO} from '../utils/EOAPIMethods';
@@ -10,12 +19,16 @@ import {
   GetFormattedDate,
   NetworkErrorHandler,
 } from '../../general/utils/HelperMethods';
+import {AuthContext} from '../../general/context/auth-context';
+
+const dimensionWidth = Dimensions.get('window').width;
 
 function EOHistoryScreen({navigation}) {
+  const authCtx = React.useContext(AuthContext);
   const [data, setData] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [fallbackMessage, setFallbackMessage] =
-    React.useState(`There's nothing here`);
+  const [fallbackMessage, setFallbackMessage] = React.useState(`No data found`);
+  const [refresh, setRefresh] = React.useState(false);
 
   const date = new Date();
   const dateminus7 = date.setDate(date.getDate() - 7);
@@ -30,49 +43,38 @@ function EOHistoryScreen({navigation}) {
   const [fromModalOpen, setFromModalOpen] = React.useState(false);
   const [toModalOpen, setToModalOpen] = React.useState(false);
 
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     async function getHistory() {
-  //       setIsLoading(true);
-  //       try {
-  //         const response = await getHistoryEO(
-  //           '211002338',
-  //           false,
-  //           fromDateSet,
-  //           toDateSet,
-  //         );
-  //         setData(response);
-  //         setIsLoading(false);
-  //       } catch (err) {
-  //         NetworkErrorHandler(err);
-  //         setFallbackMessage('No connection');
-  //         setIsLoading(false);
-  //       }
-  //     }
-  //     getHistory();
-  //   }, [fromDate, toDate]),
-  // );
+  useFocusEffect(
+    React.useCallback(() => {
+      StatusBar.setBarStyle('dark-content');
+
+      Platform.OS === 'android'
+        ? StatusBar.setBackgroundColor('white')
+        : undefined;
+    }, []),
+  );
+
+  async function onRefresh() {
+    setRefresh(!refresh);
+  }
 
   React.useEffect(() => {
-    async function getHistory() {
+    async function getHistory(nik) {
       setIsLoading(true);
       try {
-        const response = await getHistoryEO(
-          '211002338',
-          false,
-          fromDateSet,
-          toDateSet,
-        );
+        const response = await getHistoryEO(nik, false, fromDateSet, toDateSet);
         setData(response);
+        setFallbackMessage('No data found');
         setIsLoading(false);
       } catch (err) {
-        NetworkErrorHandler(err);
-        setFallbackMessage('No connection');
+        const networkResponse = await NetworkErrorHandler(err);
+        if (networkResponse.length > 0) {
+          setFallbackMessage(networkResponse);
+        }
         setIsLoading(false);
       }
     }
-    getHistory();
-  }, [fromDate, toDate]);
+    getHistory(authCtx.NIK);
+  }, [fromDate, toDate, refresh]);
 
   const fromDatePicker = (
     <DatePicker
@@ -109,20 +111,23 @@ function EOHistoryScreen({navigation}) {
   );
 
   let content = (
-    <View style={styles.fallbackContainer}>
-      <Text style={styles.fallbackText}>
-        {fallbackMessage ? fallbackMessage : 'Fallback Message'}
-      </Text>
-    </View>
+    <GeneralComponents.Fallback
+      refreshColor={Colors.EOPrimary}
+      fallbackMessage={fallbackMessage}
+      onRefresh={onRefresh}
+    />
   );
 
   if (data.length > 0) {
-    content = <EOComponents.Content data={data} />;
+    content = <EOComponents.Content data={data} onRefreshList={onRefresh} />;
   }
 
   if (isLoading) {
     content = (
-      <GeneralComponents.LoadingOverlay message="Loading delivery history data..." />
+      <GeneralComponents.LoadingOverlay
+        message="Loading..."
+        loadingColor={Colors.EOPrimary}
+      />
     );
   }
 
@@ -131,14 +136,17 @@ function EOHistoryScreen({navigation}) {
       <StatusBar barStyle="dark-content" backgroundColor="white" />
       <SafeAreaView style={styles.rootContainer}>
         <GeneralComponents.Background
+          bg={require('../assets/BG.png')}
           containerStyle={{
             justifyContent: 'flex-start',
-            padding: 0,
             paddingTop: 16,
           }}>
           {fromDatePicker}
           {toDatePicker}
-          <GeneralComponents.Header title="History" />
+          <GeneralComponents.Header
+            title="History"
+            backButtonColor={Colors.EOPrimary}
+          />
           <EOComponents.DatePicker
             formattedFromDate={formattedFromDate}
             formattedToDate={formattedToDate}
@@ -158,13 +166,5 @@ const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
     backgroundColor: 'white',
-  },
-  fallbackContainer: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  fallbackText: {
-    fontSize: 16,
-    color: 'black',
   },
 });

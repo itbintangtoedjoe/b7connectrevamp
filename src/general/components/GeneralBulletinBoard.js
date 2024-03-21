@@ -1,14 +1,20 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Platform} from 'react-native';
 import GeneralBulletinBoardList from './GeneralBulletinBoard/GeneralBulletinBoardList';
+import PlusJakartaSansText from '../../../fonts/PlusJakartaSansText';
+import PoppinsText from '../../../fonts/PoppinsText';
 
-function GeneralBulletinBoard() {
+function GeneralBulletinBoard({data}) {
   return (
     <View style={styles.bulletinBoardContainer}>
       <View style={styles.titleContainer}>
-        <Text style={styles.titleText}>Bulletin Board</Text>
-        <Text style={styles.swipeText}>Swipe for more</Text>
+        <PoppinsText weight="Bold" style={styles.titleText}>
+          Bulletin Board
+        </PoppinsText>
+        <PoppinsText
+          weight="Medium"
+          style={styles.swipeText}>{`Swipe for more >>`}</PoppinsText>
       </View>
-      <GeneralBulletinBoardList />
+      <GeneralBulletinBoardList data={data} />
     </View>
   );
 }
@@ -27,11 +33,11 @@ const styles = StyleSheet.create({
   },
   titleText: {
     color: 'black',
-    fontWeight: 'bold',
     fontSize: 18,
+    marginBottom: Platform.OS === 'ios' ? 0 : -8,
   },
   swipeText: {
     color: 'grey',
-    fontWeight: 'bold',
+    marginBottom: Platform.OS === 'ios' ? 0 : -6,
   },
 });

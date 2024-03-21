@@ -1,9 +1,8 @@
-import {View, Text, StyleSheet, FlatList, Dimensions} from 'react-native';
+import { View, Text, StyleSheet, FlatList, Dimensions } from "react-native";
 
-import {GeneralNewsData} from './GeneralNewsData';
-import GeneralNewsItem from './GeneralNewsItem';
+import GeneralNewsItem from "./GeneralNewsItem";
 
-const DimensionWidth = Dimensions.get('window').width;
+const DimensionWidth = Dimensions.get("window").width;
 
 function renderNewsItem(data) {
   return (
@@ -13,16 +12,16 @@ function renderNewsItem(data) {
   );
 }
 
-function GeneralNewsList() {
+function GeneralNewsList({ data }) {
   return (
     <View style={styles.rootContainer}>
       <FlatList
         horizontal
         style={styles.flatlist}
         showsHorizontalScrollIndicator={false}
-        data={GeneralNewsData}
+        data={data}
         renderItem={renderNewsItem}
-        snapToAlignment={'center'}
+        snapToAlignment={"center"}
         snapToInterval={DimensionWidth}
         disableIntervalMomentum
       />

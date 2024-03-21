@@ -5,34 +5,61 @@ import {
   StyleSheet,
   ImageBackground,
   Dimensions,
+  Pressable,
+  Platform,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+
 import Colors from '../../constants/Colors';
 import Styles from '../../constants/Styles';
+import PlusJakartaSansText from '../../../../fonts/PlusJakartaSansText';
+import PoppinsText from '../../../../fonts/PoppinsText';
 
 const DimensionWidth = Dimensions.get('window').width;
 
-function GeneralNewsItem({uri, title, desc, overlay}) {
+function GeneralNewsItem(item) {
+  const navigation = useNavigation();
+
+  function pressHandler() {
+    navigation.navigate('NewsDetail', {item: item});
+  }
+
   return (
-    <View style={[styles.shadowContainer, Styles.shadow]}>
+    <Pressable
+      onPress={pressHandler}
+      style={({pressed}) => [
+        styles.shadowContainer,
+        Styles.shadow,
+        pressed && Styles.pressed,
+      ]}>
       <View style={styles.newsContainer}>
         <View style={styles.newsImage}>
           <ImageBackground
-            source={uri}
+            source={{uri: item.thumbnail_url}}
             resizeMode="cover"
             style={styles.imageBackground}>
             <ImageBackground
-              source={overlay}
+              source={require('../../assets/newsOverlay.png')}
               resizeMode="cover"
               style={styles.imageBackground}>
               <View style={styles.newsHeadlineContainer}>
-                <Text style={[styles.newsHeadlineTitleText]}>{title}</Text>
-                <Text style={[styles.newsHeadlineDescText]}>{desc}</Text>
+                <PoppinsText
+                  numberOfLines={2}
+                  weight="Bold"
+                  style={[styles.newsHeadlineTitleText]}>
+                  {item.title}
+                </PoppinsText>
+                <PoppinsText
+                  numberOfLines={2}
+                  style={[styles.newsHeadlineDescText]}>
+                  {item.summary}
+                </PoppinsText>
               </View>
             </ImageBackground>
           </ImageBackground>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 }
 
@@ -42,13 +69,14 @@ const styles = StyleSheet.create({
   shadowContainer: {
     marginHorizontal: DimensionWidth * 0.04,
     marginTop: 8,
-    marginBottom: 16,
+    marginBottom: 8,
     borderRadius: 12,
     backgroundColor: 'black',
   },
   newsContainer: {
     width: DimensionWidth * 0.92,
-    height: 250,
+    height: 'auto',
+    aspectRatio: 4 / 3,
     borderRadius: 12,
     backgroundColor: 'black',
     overflow: 'hidden',
@@ -60,7 +88,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   pointerContainer: {
-    //borderWidth: 1,
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -68,16 +95,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
   },
   newsHeadlineContainer: {
-    //borderWidth: 1,
     flex: 1,
     paddingHorizontal: 16,
     paddingBottom: 16,
     justifyContent: 'flex-end',
   },
   newsHeadlineTitleText: {
-    fontWeight: 'bold',
     fontSize: 20,
     color: Colors.secondaryColor,
+    marginBottom: Platform.OS === 'ios' ? 0 : -8,
   },
   newsHeadlineDescText: {
     flexWrap: 'wrap',
@@ -86,5 +112,6 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'justify',
     marginTop: 4,
+    marginBottom: Platform.OS === 'ios' ? 0 : -2,
   },
 });

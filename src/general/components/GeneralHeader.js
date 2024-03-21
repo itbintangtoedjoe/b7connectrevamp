@@ -1,10 +1,13 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Platform, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import Colors from '../constants/Colors';
 import GeneralPressableIcon from './GeneralPressableIonicons';
 import GeneralIonicons from './GeneralIonicons';
+import PlusJakartaSansText from '../../../fonts/PlusJakartaSansText';
+import PoppinsText from '../../../fonts/PoppinsText';
 
 function GeneralHeader({
   title,
@@ -14,30 +17,41 @@ function GeneralHeader({
   iconColor,
   containerStyle,
   textStyle,
+  children,
+  backButtonColor,
 }) {
   const navigation = useNavigation();
 
   return (
     <View style={[styles.headerContainer, containerStyle]}>
-      {/* <GeneralPressableIcon
-        onPress={() => navigation.pop()}
-        name={iconName ? iconName : 'arrow-back'}
-        size={iconSize ? iconSize : 28}
-        color={iconColor ? iconColor : 'black'}
-      /> */}
-      <Text style={[styles.headerTitleText, textStyle]}>
-        {title ? title : 'Title'}
-      </Text>
-      {offline && (
-        <View style={styles.offlineContainer}>
-          <Text style={styles.offlineText}>Offline</Text>
-        </View>
-      )}
-      {/* <GeneralIonicons
-        name={iconName ? iconName : 'arrow-back'}
-        size={iconSize ? iconSize : 28}
-        color="transparent"
-      /> */}
+      <View style={styles.leftContainer}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}>
+          <Ionicons
+            name="arrow-back"
+            size={24}
+            color={backButtonColor ? backButtonColor : Colors.primaryColor}
+          />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.middleContainer}>
+        <PoppinsText weight="Bold" style={[styles.headerTitleText, textStyle]}>
+          {title ? title : 'Page'}
+          {/* {'Halo Bosku Apa Kabarmuu Hehehe'} */}
+        </PoppinsText>
+        {offline && (
+          <PoppinsText weight="Bold" style={styles.offlineContainer}>
+            <Text style={styles.offlineText}>Offline</Text>
+          </PoppinsText>
+        )}
+      </View>
+      <View style={styles.rightContainer}>
+        {/* <TouchableOpacity onPress={() => {}}>
+          <Text>Halo</Text>
+        </TouchableOpacity> */}
+      </View>
     </View>
   );
 }
@@ -46,16 +60,29 @@ export default GeneralHeader;
 
 const styles = StyleSheet.create({
   headerContainer: {
-    //borderWidth: 1,
     flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    backgroundColor: 'white',
+  },
+  leftContainer: {
+    flex: 1,
+    alignItems: 'flex-start',
+  },
+  middleContainer: {
+    flex: 8,
     alignItems: 'center',
   },
+  rightContainer: {
+    flex: 1,
+    alignItems: 'flex-end',
+  },
   headerTitleText: {
-    fontWeight: '800',
-    fontSize: 20,
+    fontSize: 16,
     color: 'black',
+    marginBottom: Platform.OS === 'ios' ? 0 : -6,
   },
   offlineContainer: {
     justifyContent: 'center',
@@ -67,7 +94,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primaryColor100,
   },
   offlineText: {
-    fontWeight: '800',
     fontSize: 12,
     color: Colors.primaryColor,
   },

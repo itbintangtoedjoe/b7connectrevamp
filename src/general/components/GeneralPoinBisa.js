@@ -1,8 +1,10 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Platform} from 'react-native';
 
 import Colors from '../constants/Colors';
 import Styles from '../constants/Styles';
 import GeneralIonicons from './GeneralIonicons';
+import PlusJakartaSansText from '../../../fonts/PlusJakartaSansText';
+import PoppinsText from '../../../fonts/PoppinsText';
 
 function GeneralPoinBisa() {
   const amount = '';
@@ -11,16 +13,18 @@ function GeneralPoinBisa() {
       <View style={styles.walletAmountContainer}>
         <GeneralIonicons name="wallet" size={28} color={Colors.primaryColor} />
         <View style={{marginLeft: 12}}>
-          <Text style={styles.poinbisaText}>POINBISA</Text>
+          <PoppinsText weight="Bold" style={styles.poinbisaText}>
+            POINBISA
+          </PoppinsText>
           {/* <View style={styles.poinbisaDivider}></View> */}
-          <Text style={styles.walletAmountText}>
+          <PoppinsText style={styles.walletAmountText}>
             {amount ? amount : 'N/A'} {amount ? 'points' : ''}
-          </Text>
+          </PoppinsText>
         </View>
       </View>
       <View style={styles.walletIconContainer}>
         <GeneralIonicons name="download" size={28} color="grey" />
-        <Text style={styles.walletIconText}>Redeem</Text>
+        <PoppinsText style={styles.walletIconText}>Redeem</PoppinsText>
       </View>
     </View>
   );
@@ -47,10 +51,8 @@ const styles = StyleSheet.create({
     paddingLeft: 24,
   },
   poinbisaText: {
-    //borderWidth: 1,
-    fontWeight: 'bold',
-    //fontSize: 16,
     color: 'black',
+    marginBottom: Platform.OS === 'ios' ? 0 : -4,
   },
   poinbisaDivider: {
     width: 1,
@@ -59,10 +61,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
   },
   walletAmountText: {
-    //borderWidth: 1,
-    //fontWeight: 'bold',
     //fontSize: 16,
     color: 'black',
+    marginBottom: Platform.OS === 'ios' ? 0 : -2,
   },
   walletIconContainer: {
     //borderWidth: 1,
@@ -72,9 +73,9 @@ const styles = StyleSheet.create({
     paddingRight: 24,
   },
   walletIconText: {
-    fontWeight: 'bold',
     fontSize: 10,
     color: 'grey',
     textAlign: 'center',
+    marginBottom: Platform.OS === 'ios' ? 0 : -2,
   },
 });

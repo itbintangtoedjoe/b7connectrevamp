@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "750574496782",
+    "project_id": "b7-connect",
+    "storage_bucket": "b7-connect.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750574496782:android:80bafc2d93cd7a0ec4605f",
+        "android_client_info": {
+          "package_name": "com.b7.b7connect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "750574496782-ud6535n1ppvbfq199n5ojo3q759ecdkb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDjUozoVipHZqThlYyU05CWSzHF24BMpY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "750574496782-ud6535n1ppvbfq199n5ojo3q759ecdkb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "750574496782-hd49kg10t7t625adluvvt2tcli1m4p99.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.b7.b7connect"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

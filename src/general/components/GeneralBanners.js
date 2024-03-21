@@ -1,13 +1,25 @@
 import React from 'react';
-import {View, StyleSheet, Image} from 'react-native';
+import {Text, View, StyleSheet, Image, Dimensions} from 'react-native';
+import Carousel from 'react-native-reanimated-carousel';
 
-function GeneralBanners() {
-  const bannerUri =
-    'https://portal.bintang7.com/TARA/Template/images/banners/banner3.png';
+const dimensionWidth = Dimensions.get('window').width;
 
+function GeneralBanners({bannerData}) {
   return (
     <View style={styles.bannersContainer}>
-      <Image style={styles.image} source={{uri: bannerUri}} />
+      <Carousel
+        loop
+        width={dimensionWidth}
+        height="auto"
+        autoPlay={true}
+        data={bannerData}
+        scrollAnimationDuration={2000}
+        pagingEnabled={false}
+        snapEnabled={true}
+        renderItem={({item}) => (
+          <Image source={{uri: item.ImageUrl}} style={styles.image} />
+        )}
+      />
     </View>
   );
 }
@@ -15,9 +27,7 @@ function GeneralBanners() {
 export default GeneralBanners;
 
 const styles = StyleSheet.create({
-  bannersContainer: {
-    flex: 1,
-  },
+  bannersContainer: {},
   image: {
     width: '100%',
     height: '100%',

@@ -1,12 +1,12 @@
-import axios from 'axios';
+import axios from "axios";
 
 export async function getHistoryEO(nik, ongoing, fromDate, toDate) {
   const historyItems = [];
   const response = await axios.post(
-    'https://portal.bintang7.com/ekspedisionline/pengiriman/get-history-user',
+    "https://portal.bintang7.com/ekspedisionline/pengiriman/get-history-user",
     {
       nik: nik,
-    },
+    }
   );
 
   for (const key in response.data) {
@@ -24,14 +24,14 @@ export async function getHistoryEO(nik, ongoing, fromDate, toDate) {
 
     if (
       ongoing &&
-      historyObj.Status !== 'Selesai' &&
+      historyObj.Status !== "Selesai" &&
       new Date(historyObj.CreationDate) >= new Date(fromDate) &&
       new Date(historyObj.CreationDate) <= new Date(toDate)
     ) {
       historyItems.push(historyObj);
     } else if (
       !ongoing &&
-      historyObj.Status === 'Selesai' &&
+      historyObj.Status === "Selesai" &&
       new Date(historyObj.CreationDate) >= new Date(fromDate) &&
       new Date(historyObj.CreationDate) <= new Date(toDate)
     ) {
@@ -42,13 +42,13 @@ export async function getHistoryEO(nik, ongoing, fromDate, toDate) {
   return historyItems;
 }
 
-export async function getHistoryDetailEO(id) {
+export async function getTimelineEO(id) {
   const historyDetailItems = [];
   const response = await axios.post(
-    'https://portal.bintang7.com/ekspedisionline/pengiriman/get-timeline',
+    "https://portal.bintang7.com/ekspedisionline/pengiriman/get-timeline",
     {
       id: id,
-    },
+    }
   );
 
   for (const key in response.data) {
@@ -67,4 +67,34 @@ export async function getHistoryDetailEO(id) {
   }
 
   return historyDetailItems;
+}
+
+export async function getHistoryDetailEO(keterangan, id, action, nik) {
+  const response = await axios.post(
+    "https://portal.bintang7.com/ekspedisionline/pengiriman/get-detail",
+    {
+      keterangan: keterangan,
+      id: id,
+      resibarang: id,
+      status: action,
+      nikpenerima: nik,
+    }
+  );
+  const responseData = response.data;
+
+  return responseData;
+}
+
+export async function updateDeliveryStatusEO(id, nik, status, keterangan) {
+  const response = await axios.post(
+    "https://portal.bintang7.com/ekspedisionline/pengiriman/update-status",
+    {
+      id: id,
+      idUpdater: nik,
+      status: status,
+      keterangan: keterangan,
+    }
+  );
+
+  return response;
 }

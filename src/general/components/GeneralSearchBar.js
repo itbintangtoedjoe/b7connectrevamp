@@ -12,18 +12,27 @@ function GeneralSearchBar({
   containerStyle,
   barStyle,
   textInputConfig,
+  iconColor,
 }) {
   return (
     <View style={[styles.searchBarContainer, containerStyle]}>
+      <GeneralPressableIcon
+        name="search"
+        size={24}
+        color={iconColor ? iconColor : 'black'}
+      />
       <TextInput
         style={[styles.searchBar, barStyle]}
-        placeholder={placeholder ? placeholder : 'Search...'}
+        numberOfLines={1}
+        placeholder={placeholder ? placeholder : 'Pencarian...'}
+        placeholderTextColor={'grey'}
         onChangeText={onUpdateValue}
-        selectionColor={Colors.primaryColor}
+        cursorColor={iconColor ? iconColor : Colors.primaryColor}
+        selectionColor={'lightgrey'}
         textAlignVertical="center"
+        autoCapitalize="none"
         {...textInputConfig}
       />
-      <GeneralPressableIcon name="search" size={24} color="black" />
     </View>
   );
 }
@@ -34,7 +43,7 @@ const styles = StyleSheet.create({
   searchBarContainer: {
     flexDirection: 'row',
     width: DimensionWidth * 0.9,
-    height: 55,
+    height: 50,
     justifyContent: 'space-between',
     alignItems: 'center',
     marginVertical: 16,
@@ -46,5 +55,6 @@ const styles = StyleSheet.create({
   },
   searchBar: {
     width: '90%',
+    fontFamily: 'PlusJakartaSans-Regular',
   },
 });

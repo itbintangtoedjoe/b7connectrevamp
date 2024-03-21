@@ -15,27 +15,27 @@ function GeneralAppsItem({
 }) {
   function pressHandler(type) {
     switch (type) {
-      case 'TARA':
-        console.log('tara');
-        break;
-      case 'CAM':
-        console.log('cam');
-        break;
-      case 'Ekspedisi Online':
-        console.log('eo');
-        break;
-      case 'Reservasi Mobil':
-        console.log('rm');
-        break;
-      case 'Chatbot':
-        console.log('chatbot');
-        break;
-      case 'Sensory Online':
-        console.log('so');
-        break;
-      case 'More':
-        console.log('more');
-        break;
+      // case 'TARA':
+      //   console.log('tara');
+      //   break;
+      // case 'CAM':
+      //   console.log('cam');
+      //   break;
+      // case 'Ekspedisi Online':
+      //   console.log('eo');
+      //   break;
+      // case 'Reservasi Mobil':
+      //   console.log('rm');
+      //   break;
+      // case 'Chatbot':
+      //   console.log('chatbot');
+      //   break;
+      // case 'Sensory Online':
+      //   console.log('so');
+      //   break;
+      // case 'More':
+      //   console.log('more');
+      //   break;
       default:
         break;
     }

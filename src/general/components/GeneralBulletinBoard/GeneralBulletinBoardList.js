@@ -1,9 +1,9 @@
-import {View, Text, StyleSheet, FlatList, Dimensions} from 'react-native';
+import { View, Text, StyleSheet, FlatList, Dimensions } from "react-native";
 
-import {GeneralBulletinBoardData} from './GeneralBulletinBoardData';
-import GeneralBulletinBoardItem from './GeneralBulletinBoardItem';
+import { GeneralBulletinBoardData } from "./GeneralBulletinBoardData";
+import GeneralBulletinBoardItem from "./GeneralBulletinBoardItem";
 
-const DimensionWidth = Dimensions.get('window').width;
+const DimensionWidth = Dimensions.get("window").width;
 
 function renderBulletinBoardItem(data) {
   return (
@@ -13,16 +13,16 @@ function renderBulletinBoardItem(data) {
   );
 }
 
-function GeneralBulletinBoardList() {
+function GeneralBulletinBoardList({ data }) {
   return (
     <View style={styles.rootContainer}>
       <FlatList
         horizontal
         style={styles.flatlist}
         showsHorizontalScrollIndicator={false}
-        data={GeneralBulletinBoardData}
+        data={data}
         renderItem={renderBulletinBoardItem}
-        snapToAlignment={'center'}
+        snapToAlignment={"center"}
         snapToInterval={DimensionWidth}
         disableIntervalMomentum
       />

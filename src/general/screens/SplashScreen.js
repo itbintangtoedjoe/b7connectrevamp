@@ -7,12 +7,27 @@ import {
   ImageBackground,
   Platform,
 } from 'react-native';
+import {useFocusEffect} from '@react-navigation/native';
 import Colors from '../constants/Colors';
 
 function SplashScreen() {
+  useFocusEffect(
+    React.useCallback(() => {
+      StatusBar.setBarStyle(
+        Platform.OS === 'ios' ? 'dark-content' : 'light-content',
+      );
+
+      Platform.OS === 'android'
+        ? StatusBar.setBackgroundColor(Colors.splash)
+        : undefined;
+    }, []),
+  );
   return (
     <>
-      <StatusBar barStyle="dark-content" backgroundColor={Colors.splash} />
+      <StatusBar
+        barStyle={Platform.OS === 'ios' ? 'dark-content' : 'light-content'}
+        backgroundColor={Colors.splash}
+      />
       <View style={styles.rootContainer}>
         <ImageBackground
           source={

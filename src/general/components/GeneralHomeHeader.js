@@ -1,36 +1,47 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View, Platform} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 import Colors from '../constants/Colors';
 import Styles from '../constants/Styles';
 import GeneralPressableIcon from './GeneralPressableIonicons';
+import {GetFormattedName} from '../utils/HelperMethods';
+import GeneralIonicons from './GeneralIonicons';
+import PlusJakartaSansText from '../../../fonts/PlusJakartaSansText';
+import PoppinsText from '../../../fonts/PoppinsText';
 
-function GeneralHomeHeader() {
+function GeneralHomeHeader({username, notifAmount}) {
   const navigation = useNavigation();
-  const username = '';
 
   return (
     <View style={[styles.headerContainer, Styles.shadow]}>
       <View style={styles.headerUserContainer}>
-        <Text style={styles.welcomeText}>Welcome,</Text>
-        <Text style={styles.usernameText}>
-          {username ? username : 'Pengguna B7 Connect'}
-        </Text>
+        <PoppinsText style={styles.welcomeText}>Welcome,</PoppinsText>
+        <PoppinsText weight="Bold" style={styles.usernameText}>
+          {username ? GetFormattedName(username) : 'Pengguna B7 Connect'}
+        </PoppinsText>
       </View>
       <View style={styles.headerIconContainer}>
-        <View style={styles.headerIcon}>
-          <GeneralPressableIcon
-            onPress={() => navigation.navigate('Notification')}
+        <Pressable
+          onPress={() => navigation.navigate('Notification')}
+          style={({pressed}) => [styles.headerIcon, pressed && Styles.pressed]}>
+          <GeneralIonicons
             name="notifications"
             color={Colors.primaryColor}
+            size={28}
           />
-        </View>
-        <View style={styles.headerIcon}>
+          {notifAmount > 0 && (
+            <View style={styles.notificationAmountContainer}>
+              <Text style={styles.notifAmountText}>{notifAmount}</Text>
+            </View>
+          )}
+        </Pressable>
+        <View style={[styles.headerIcon, {marginLeft: 8}]}>
           <GeneralPressableIcon
             onPress={() => navigation.navigate('Profile')}
-            name="settings"
+            name="settings-outline"
             color={Colors.primaryColor}
+            size={28}
           />
         </View>
       </View>
@@ -57,16 +68,33 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   headerIcon: {
-    marginLeft: 16,
+    //borderWidth: 1,
+    flexDirection: 'row',
     alignItems: 'center',
   },
   welcomeText: {
-    fontWeight: 'normal',
     color: Colors.primaryColor,
+    marginBottom: Platform.OS === 'ios' ? 0 : -4,
   },
   usernameText: {
-    fontWeight: 'bold',
     color: Colors.primaryColor,
     fontSize: 16,
+    marginBottom: Platform.OS === 'ios' ? 0 : -4,
+  },
+  notificationAmountContainer: {
+    width: 18,
+    height: 'auto',
+    aspectRatio: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'flex-start',
+    marginLeft: -12,
+    borderRadius: 100,
+    backgroundColor: Colors.primaryColor100,
+  },
+  notifAmountText: {
+    fontWeight: '900',
+    fontSize: 10,
+    color: Colors.primaryColor,
   },
 });

@@ -1,10 +1,14 @@
-import {Pressable, View, Text, StyleSheet} from 'react-native';
+import {Pressable, View, Text, StyleSheet, Platform} from 'react-native';
 
 import Colors from '../../../general/constants/Colors';
 import Styles from '../../../general/constants/Styles';
 import GeneralIonicons from '../../../general/components/GeneralIonicons';
+import GeneralMaterialIcons from '../../../general/components/GeneralMaterialIcons';
+import PlusJakartaSansText from '../../../../fonts/PlusJakartaSansText';
+import PoppinsText from '../../../../fonts/PoppinsText';
 
 function CAMModalButton({
+  materialicon,
   onPress,
   title,
   iconName,
@@ -12,7 +16,6 @@ function CAMModalButton({
   iconColor,
   containerStyle,
   textStyle,
-  fill,
 }) {
   return (
     <Pressable
@@ -20,23 +23,25 @@ function CAMModalButton({
       style={({pressed}) => [
         styles.modalButtonContainer,
         pressed && Styles.pressed,
-        fill && {backgroundColor: Colors.primaryColor},
         containerStyle,
       ]}>
-      <GeneralIonicons
-        name={iconName ? iconName : 'checkmark'}
-        size={iconSize ? iconSize : 18}
-        color={iconColor ? iconColor : Colors.primaryColor}
-      />
-      <Text
-        style={[styles.modalButtonText, fill && {color: 'white'}, textStyle]}>
+      {!materialicon && (
+        <GeneralIonicons
+          name={iconName ? iconName : 'checkmark'}
+          size={iconSize ? iconSize : 18}
+          color={iconColor ? iconColor : Colors.primaryColor50}
+        />
+      )}
+      {materialicon && (
+        <GeneralMaterialIcons
+          name={iconName ? iconName : 'check'}
+          size={iconSize ? iconSize : 18}
+          color={iconColor ? iconColor : Colors.primaryColor50}
+        />
+      )}
+      <PoppinsText weight="Bold" style={[styles.modalButtonText, textStyle]}>
         {title ? title : 'Title'}
-      </Text>
-      {/* <GeneralIonicons
-        name={iconName ? iconName : 'checkmark'}
-        size={iconSize ? iconSize : 18}
-        color="transparent"
-      /> */}
+      </PoppinsText>
     </Pressable>
   );
 }
@@ -47,19 +52,17 @@ const styles = StyleSheet.create({
   modalButtonContainer: {
     flexDirection: 'row',
     width: '100%',
-    height: 50,
+    height: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 8,
-    borderRadius: 12,
-    borderWidth: 2,
-    borderColor: Colors.primaryColor,
+    borderRadius: 8,
+    borderColor: 'white',
     backgroundColor: 'white',
   },
   modalButtonText: {
-    fontWeight: 'bold',
-    fontSize: 12,
-    marginLeft: 4,
-    color: Colors.primaryColor,
+    marginBottom: Platform.OS === 'ios' ? 0 : -3,
+    marginLeft: 2,
+    fontSize: 13,
+    color: Colors.primaryColor50,
   },
 });

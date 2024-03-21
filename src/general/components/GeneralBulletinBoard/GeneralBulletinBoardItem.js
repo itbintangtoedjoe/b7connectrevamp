@@ -1,19 +1,20 @@
-import React from 'react';
-import {View, StyleSheet, ImageBackground, Dimensions} from 'react-native';
+import React from "react";
+import { View, StyleSheet, ImageBackground, Dimensions } from "react-native";
 
-import Styles from '../../constants/Styles';
+import Styles from "../../constants/Styles";
 
-const DimensionWidth = Dimensions.get('window').width;
+const DimensionWidth = Dimensions.get("window").width;
 
-function GeneralBulletinBoardItem({uri}) {
+function GeneralBulletinBoardItem({ ImageUrl }) {
   return (
     <View style={[styles.shadowContainer, Styles.shadow]}>
       <View style={styles.bulletinBoardContainer}>
         <View style={styles.bulletinBoardImage}>
           <ImageBackground
-            source={uri}
-            resizeMode="cover"
-            style={styles.imageBackground}></ImageBackground>
+            source={{ uri: ImageUrl }}
+            resizeMode="contain"
+            style={styles.imageBackground}
+          ></ImageBackground>
         </View>
       </View>
     </View>
@@ -26,17 +27,17 @@ const styles = StyleSheet.create({
   shadowContainer: {
     marginHorizontal: DimensionWidth * 0.04,
     marginTop: 8,
-    marginBottom: 24,
+    marginBottom: 16,
     borderRadius: 12,
-    backgroundColor: 'black',
+    backgroundColor: "white",
   },
   bulletinBoardContainer: {
     width: DimensionWidth * 0.92,
-    height: 'auto',
-    aspectRatio: 1 / 1.414,
+    height: "auto",
+    aspectRatio: 210 / 297,
     borderRadius: 12,
-    backgroundColor: 'black',
-    overflow: 'hidden',
+    backgroundColor: "white",
+    overflow: "hidden",
   },
   bulletinBoardImage: {
     flex: 1,

@@ -1,8 +1,16 @@
-import {View, Text, StyleSheet, Pressable, ImageBackground} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  ImageBackground,
+} from "react-native";
 
-import Colors from '../../constants/Colors';
-import GeneralIonicons from '../GeneralIonicons';
-import GeneralMaterialIcons from '../GeneralMaterialIcons';
+import Colors from "../../constants/Colors";
+import GeneralIonicons from "../GeneralIonicons";
+import GeneralMaterialIcons from "../GeneralMaterialIcons";
+import PlusJakartaSansText from "../../../../fonts/PlusJakartaSansText";
+import PoppinsText from "../../../../fonts/PoppinsText";
 
 function GeneralApp({
   onPress,
@@ -23,36 +31,41 @@ function GeneralApp({
         <>
           <Pressable
             onPress={onPress}
-            style={({pressed}) => pressed && styles.pressed}>
+            style={({ pressed }) => pressed && styles.pressed}
+          >
             <View
               style={[
                 styles.appIcon,
                 iconStyle,
-                appColor && {backgroundColor: appColor},
-              ]}>
+                appColor && { backgroundColor: appColor },
+              ]}
+            >
               {appImage && (
                 <ImageBackground
                   source={appImage}
                   resizeMode="cover"
-                  style={{width: '100%', height: '100%'}}></ImageBackground>
+                  style={{ width: "100%", height: "100%" }}
+                ></ImageBackground>
               )}
               {!appImage && ionicon && (
                 <GeneralIonicons
-                  name={appIcon ? appIcon : 'person-circle'}
+                  name={appIcon ? appIcon : "person-circle"}
                   size={32}
-                  color={'white'}
+                  color={"white"}
                 />
               )}
               {!appImage && materialIcon && (
                 <GeneralMaterialIcons
-                  name={appIcon ? appIcon : 'account-circle'}
+                  name={appIcon ? appIcon : "account-circle"}
                   size={32}
-                  color={'white'}
+                  color={"white"}
                 />
               )}
             </View>
           </Pressable>
-          <Text style={[styles.appTitle, titleStyle]}>{appTitle}</Text>
+          <PoppinsText weight="Medium" style={[styles.appTitle, titleStyle]}>
+            {appTitle}
+          </PoppinsText>
         </>
       )}
     </View>
@@ -70,26 +83,24 @@ const styles = StyleSheet.create({
     height: 90,
     width: 60,
     marginVertical: 6,
-    marginHorizontal: '3%',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    marginHorizontal: "3%",
+    justifyContent: "flex-start",
+    alignItems: "center",
   },
   appIcon: {
     height: 55,
-    width: 'auto',
+    width: "auto",
     aspectRatio: 1,
     backgroundColor: Colors.primaryColor,
     borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    overflow: 'hidden',
+    justifyContent: "center",
+    alignItems: "center",
+    overflow: "hidden",
   },
   appTitle: {
-    //borderWidth: 1,
-    color: 'black',
+    color: "black",
     fontSize: 12,
-    //fontWeight: 'bold',
-    textAlign: 'center',
-    marginTop: 4,
+    textAlign: "center",
+    marginTop: 2,
   },
 });
