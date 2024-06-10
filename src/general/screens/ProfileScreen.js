@@ -18,6 +18,7 @@ import {AuthContext} from '../context/auth-context';
 import {GetFormattedName} from '../utils/HelperMethods';
 import PlusJakartaSansText from '../../../fonts/PlusJakartaSansText';
 import PoppinsText from '../../../fonts/PoppinsText';
+import {DeactivateAccount} from '../utils/APIMethods';
 
 const DimensionWidth = Dimensions.get('window').width;
 
@@ -75,7 +76,7 @@ function ProfileScreen({navigation}) {
   }
 
   async function confirmDeactivate() {
-    const response = await deactivateAccount(authCtx.NIK);
+    const response = await DeactivateAccount(authCtx.NIK);
     Toast.show({
       type: 'notifToast',
       text1: 'Success',
@@ -132,10 +133,10 @@ function ProfileScreen({navigation}) {
                 <PoppinsText weight="Bold" style={styles.usernameText}>
                   {authCtx.Username
                     ? GetFormattedName(authCtx.Username)
-                    : 'Pengguna B7 Connect'}
+                    : 'B7 Connect User'}
                 </PoppinsText>
                 <PoppinsText style={styles.emailText}>
-                  {authCtx.Email ? authCtx.Email : 'penggunab7c@gmail.com'}
+                  {authCtx.Email ? authCtx.Email : 'b7cuser@gmail.com'}
                 </PoppinsText>
               </View>
             </View>

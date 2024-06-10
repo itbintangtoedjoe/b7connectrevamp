@@ -11,6 +11,7 @@ import {
 import Toast from 'react-native-toast-message';
 import {Notifications} from 'react-native-notifications';
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
+import CodePush from 'react-native-code-push';
 
 import Root from './navigation/navigation';
 import AuthContextProvider, {
@@ -120,7 +121,16 @@ const toastConfig = {
   ),
 };
 
+let codePushOptions = {checkFrequency: CodePush.CheckFrequency.ON_APP_RESUME};
+
 function App() {
+  React.useEffect(() => {
+    CodePush.sync({
+      installMode: CodePush.InstallMode.IMMEDIATE,
+      updateDialog: true,
+    });
+  }, []);
+
   return (
     <AuthContextProvider>
       <NavigationContainer>
@@ -131,7 +141,7 @@ function App() {
   );
 }
 
-export default App;
+export default CodePush(codePushOptions)(App);
 
 const styles = StyleSheet.create({
   rootContainer: {

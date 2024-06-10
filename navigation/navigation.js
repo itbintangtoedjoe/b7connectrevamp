@@ -7,6 +7,7 @@ import {
   StatusBar,
   Dimensions,
   Platform,
+  Linking,
 } from 'react-native';
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -16,9 +17,11 @@ import ReactNativeBiometrics, {BiometryTypes} from 'react-native-biometrics';
 import {Notifications} from 'react-native-notifications';
 import Toast from 'react-native-toast-message';
 import ScreenGuardModule from 'react-native-screenguard';
+import DeviceInfo from 'react-native-device-info';
 
 import Colors from '../src/general/constants/Colors';
 import Styles from '../src/general/constants/Styles';
+import Strings from '../src/general/constants/Strings';
 import * as General from '../src/general/screens/GeneralIndex';
 import * as CAM from '../src/cam/screens/CAMIndex';
 import * as EO from '../src/ekspedisionline/screens/EOIndex';
@@ -28,12 +31,14 @@ import {
   Authentication,
   AuthenticationEO,
   NetworkCheck,
+  CheckAppVersion,
 } from '../src/general/utils/APIMethods';
 import {AuthContext} from '../src/general/context/auth-context';
 import {SplashNetworkErrorHandler} from '../src/general/utils/HelperMethods';
 import PoppinsText from '../fonts/PoppinsText';
 import GeneralButton from '../src/general/components/GeneralButton';
 import GeneralLoadingOverlay from '../src/general/components/GeneralLoadingOverlay';
+import CAMModalButton from '../src/cam/components/CAMContent/CAMModalButton';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -315,6 +320,10 @@ function NotAuthenticated() {
         name="RegisterScreen"
         component={General.RegisterUserScreen}
       />
+      <Stack.Screen
+        name="UnlinkDevice"
+        component={General.UnlinkDeviceScreen}
+      />
       <Stack.Screen name="Authenticated" component={Authenticated} />
     </Stack.Navigator>
   );
@@ -342,12 +351,73 @@ function CheckAuth() {
   }
 
   React.useEffect(() => {
+    //code here
+    async function checkUserAppVersion() {
+      const userAppVersion = Strings.appVersion;
+      const userPlatform = Platform.OS.toUpperCase();
+      // console.log('userAppVersion: ', userAppVersion);
+      // console.log('userPlatform: ', userPlatform);
+
+      try {
+        const response = await CheckAppVersion(
+          userAppVersion,
+          '',
+          userPlatform,
+        );
+        if (response == Strings.appVersionOK) {
+          return 'OK';
+        } else {
+          return response;
+        }
+      } catch (err) {
+        const response = await SplashNetworkErrorHandler(err);
+        if (response === 'No connection') {
+          Alert.alert(
+            "Couldn't connect to a network",
+            'Please connect your device to a network',
+            [
+              {
+                text: 'Retry',
+                onPress: NetworkRetryHandler,
+              },
+            ],
+            {cancelable: false},
+          );
+        }
+      }
+    }
+    async function getDeviceUniqueID() {
+      try {
+        const uniqueId = await DeviceInfo.getUniqueId();
+        return uniqueId;
+      } catch (error) {
+        console.error('Error getting unique ID:', error);
+        return error; // or handle the error appropriately
+      }
+    }
+
     async function fetchAsyncStorage() {
       const storedEmail = await AsyncStorage.getItem('email');
       const storedPassword = await AsyncStorage.getItem('password');
       if (storedEmail && storedPassword) {
         try {
-          const response = await Authentication(storedEmail, storedPassword);
+          const uniqueDeviceID = await getDeviceUniqueID();
+          // console.log('uniq2: ', uniqueDeviceID);
+          if (!uniqueDeviceID) {
+            Alert.alert(
+              'Authentication Failed',
+              'App failed to get device ID. Please try again. If the problem persists, please contact the IT support team.',
+            );
+            return;
+          }
+
+          const response = await Authentication(
+            storedEmail,
+            storedPassword,
+            Platform.OS.toUpperCase(),
+            uniqueDeviceID,
+          );
+          // console.log(response);
           if (response.Status === false) {
             setAuthStatus(false);
             await AsyncStorage.removeItem('email');
@@ -383,13 +453,66 @@ function CheckAuth() {
         }, 1000);
       }
     }
+    checkUserAppVersion().then(status => {
+      if (status === 'OK') {
+        // Alert.alert('OK GAN');
+        fetchAsyncStorage();
+      } else {
+        if (status !== undefined) {
+          Alert.alert(
+            'There is a new update',
+            'Please update the app to continue using all features',
+            [
+              {
+                text: 'Update',
+                onPress: () => {
+                  //if the platform is android then open play store
+                  if (Platform.OS === 'android') {
+                    const appPackage = 'com.b7.b7connect';
+                    const playStoreUrl = `market://details?id=${appPackage}`;
 
-    fetchAsyncStorage();
+                    // Check if the Google Play Store app is installed
+                    Linking.canOpenURL(playStoreUrl)
+                      .then(supported => {
+                        if (supported) {
+                          Linking.openURL(playStoreUrl);
+                        } else {
+                          // If the Play Store app is not installed, try opening the app using a deep link
+                          const deepLink = `https://play.google.com/store/apps/details?id=com.b7.b7connect&hl=en&gl=US&pli=1`;
+
+                          Linking.openURL(deepLink).catch(() => {
+                            console.log(
+                              `The app is not installed, operation failed: ${deepLink}`,
+                            );
+                          });
+                        }
+                      })
+                      .catch(error =>
+                        console.error('An error occurred', error),
+                      );
+                  } else {
+                    const appStoreUrl =
+                      'https://apps.apple.com/us/app/b7-connect/id6468561110';
+                    Linking.canOpenURL(appStoreUrl).then(
+                      supported => {
+                        supported && Linking.openURL(appStoreUrl);
+                      },
+                      err => console.log(err),
+                    );
+                  }
+                },
+              },
+            ],
+          );
+        }
+      }
+    });
   }, [refresh]);
 
   return (
     <>
       {authStatus === null && <Splash />}
+
       {authStatus === true && <AuthenticatedAuth />}
       {authStatus === false && <NotAuthenticated />}
     </>

@@ -4,6 +4,10 @@
 
 //Added
 #import "RNNotifications.h"
+#import <AppCenterReactNative.h>
+#import <AppCenterReactNativeAnalytics.h>
+#import <AppCenterReactNativeCrashes.h>
+#import <CodePush/CodePush.h>
 
 @implementation AppDelegate
 
@@ -14,7 +18,13 @@
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
 
+  //added for notif
    [RNNotifications startMonitorNotifications];
+  
+  //added for app center
+  [AppCenterReactNative register];
+  [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];
+  [AppCenterReactNativeCrashes registerWithAutomaticProcessing];
 
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
@@ -24,7 +34,9 @@
 #if DEBUG
   return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"];
 #else
-  return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  //replace for codepush
+  // return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  return [CodePush bundleURL];
 #endif
 }
 

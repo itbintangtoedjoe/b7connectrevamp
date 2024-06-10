@@ -125,8 +125,8 @@ function OTPScreen({navigation}) {
         if (response.Status === 'success') {
           await AsyncStorage.setItem('otpLocalStatus', 'valid');
           const expDateBefore = new Date();
-          const expDateAfter = expDateBefore.setMonth(
-            expDateBefore.getMonth() + 1,
+          const expDateAfter = expDateBefore.setDate(
+            expDateBefore.getDate() + 7,
           );
           const expDate = new Date(expDateAfter).toISOString();
 
@@ -153,7 +153,7 @@ function OTPScreen({navigation}) {
             );
           } else {
             Alert.alert(
-              'Account Locked',
+              'Account is Locked',
               'Your account is locked for exceeding OTP attempts. Please contact the IT support team to unlock.',
             );
             authCtx.SignOut();

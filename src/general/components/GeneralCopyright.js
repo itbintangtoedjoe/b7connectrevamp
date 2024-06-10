@@ -9,7 +9,8 @@ function GeneralCopyright({textStyle}) {
     <View style={styles.rootContainer}>
       <View style={styles.copyrightContainer}>
         <PoppinsText style={[styles.copyrightText, textStyle]}>
-          {`B7 Connect ver ` + Strings.appVersion}
+          {/* {`B7 Connect ver ` + Strings.appVersion} */}
+          {`B7 Connect ver ` + Strings.appVersion + `.01`}
         </PoppinsText>
         <PoppinsText style={[styles.copyrightText, textStyle]}>
           {`Copyright © ` + new Date().getFullYear() + ` PT Bintang Toedjoe`}

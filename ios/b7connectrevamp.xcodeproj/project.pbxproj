@@ -30,6 +30,7 @@
 		4C46278C2FD44E709EC5D6B0 /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 250C01EE06F54434847F1B1E /* Poppins-Black.ttf */; };
 		4EF7EFFEF7A14414ADE54E9D /* Poppins-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 655D4F78FE484D248E719510 /* Poppins-BlackItalic.ttf */; };
 		5052E47BCCB34E5E94A2A3A3 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BFD217C65EB24FB09C896B94 /* Poppins-ExtraBold.ttf */; };
+		50E2F84E2BAC2F29000F0DF6 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 50E2F84D2BAC2F29000F0DF6 /* AppCenter-Config.plist */; };
 		54686856E70944FCBBC2D336 /* Montserrat-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A69270650B1C4ACB9B779FF6 /* Montserrat-SemiBoldItalic.ttf */; };
 		60486C28AF764734ACDDCB8E /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF0A8641C3AB4F79B45C4226 /* Montserrat-Medium.ttf */; };
 		663D92E3E822484A81D2233E /* Montserrat-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9D895EF00E549DF9C6BA76D /* Montserrat-BoldItalic.ttf */; };
@@ -83,8 +84,10 @@
 		00E356EE1AD99517003FC87E /* b7connectrevampTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = b7connectrevampTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* b7connectrevampTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = b7connectrevampTests.m; sourceTree = "<group>"; };
+		01A3BD0953A165ED5321481D /* Pods-b7connectrevamp.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-b7connectrevamp.staging.xcconfig"; path = "Target Support Files/Pods-b7connectrevamp/Pods-b7connectrevamp.staging.xcconfig"; sourceTree = "<group>"; };
 		02E864F261DD43FD823934A8 /* PlusJakartaSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "PlusJakartaSans-Light.ttf"; path = "../fonts/PlusJakartaSans-Light.ttf"; sourceTree = "<group>"; };
 		04DF9DD02F024D69BDB8BBCC /* PlusJakartaSans-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "PlusJakartaSans-ExtraBold.ttf"; path = "../fonts/PlusJakartaSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		06348FD720084EBBAF37B0C4 /* Pods-b7connectrevamp-b7connectrevampTests.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-b7connectrevamp-b7connectrevampTests.staging.xcconfig"; path = "Target Support Files/Pods-b7connectrevamp-b7connectrevampTests/Pods-b7connectrevamp-b7connectrevampTests.staging.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* b7connectrevamp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = b7connectrevamp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = b7connectrevamp/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = b7connectrevamp/AppDelegate.mm; sourceTree = "<group>"; };
@@ -106,6 +109,7 @@
 		47BD02FBB3D24335BB8993A5 /* Poppins-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-BoldItalic.ttf"; path = "../fonts/Poppins-BoldItalic.ttf"; sourceTree = "<group>"; };
 		4A97C1BBC2C84DC3989C2AB8 /* Montserrat-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ThinItalic.ttf"; path = "../fonts/Montserrat-ThinItalic.ttf"; sourceTree = "<group>"; };
 		50A3B5632B68F63800880EE4 /* b7connectrevamp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = b7connectrevamp.entitlements; path = b7connectrevamp/b7connectrevamp.entitlements; sourceTree = "<group>"; };
+		50E2F84D2BAC2F29000F0DF6 /* AppCenter-Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 		511CFD2ABF874CA99D3D045B /* Montserrat-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraLight.ttf"; path = "../fonts/Montserrat-ExtraLight.ttf"; sourceTree = "<group>"; };
 		575B970768934EF0B9353D99 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-SemiBold.ttf"; path = "../fonts/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		59C2FE20B096420CA80D62FD /* Poppins-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-LightItalic.ttf"; path = "../fonts/Poppins-LightItalic.ttf"; sourceTree = "<group>"; };
@@ -224,6 +228,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				50E2F84D2BAC2F29000F0DF6 /* AppCenter-Config.plist */,
 				13B07FAE1A68108700A75B9A /* b7connectrevamp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* b7connectrevampTests */,
@@ -253,6 +258,8 @@
 				792E60F7E6F7BC2375A7DA70 /* Pods-b7connectrevamp.release.xcconfig */,
 				8B94A7B51E69FA25CAC6D880 /* Pods-b7connectrevamp-b7connectrevampTests.debug.xcconfig */,
 				C89A21F7BAE6F5D27DEE5842 /* Pods-b7connectrevamp-b7connectrevampTests.release.xcconfig */,
+				01A3BD0953A165ED5321481D /* Pods-b7connectrevamp.staging.xcconfig */,
+				06348FD720084EBBAF37B0C4 /* Pods-b7connectrevamp-b7connectrevampTests.staging.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -456,6 +463,7 @@
 				37C5F54DB75A4B1C8CFE99BF /* Poppins-Italic.ttf in Resources */,
 				CB05164CE8DF4FA1937827E7 /* Poppins-Light.ttf in Resources */,
 				D77CF9A8CEE2425A8476C7E0 /* Poppins-LightItalic.ttf in Resources */,
+				50E2F84E2BAC2F29000F0DF6 /* AppCenter-Config.plist in Resources */,
 				4B91766EF6344322B6889463 /* Poppins-Medium.ttf in Resources */,
 				76C97EBFE69542E6B3850606 /* Poppins-MediumItalic.ttf in Resources */,
 				6F874CE4BD254264A39D667C /* Poppins-Regular.ttf in Resources */,
@@ -716,7 +724,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.4;
+				MARKETING_VERSION = 1.2.7;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -744,7 +752,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.4;
+				MARKETING_VERSION = 1.2.7;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -756,6 +764,134 @@
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
+		};
+		508FD6102C00419F00B2FF0E /* Staging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODEPUSH_KEY = "g8wViFzqC-VLhqO0cpduXtXPJMpG87cHkBE34 ";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					_LIBCPP_ENABLE_CXX17_REMOVED_UNARY_BINARY_FUNCTION,
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SDKROOT)/usr/lib/swift\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
+					"\"$(inherited)\"",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				Multi_Deployment_Config = "$(BUILD_DIR)/Release$(EFFECTIVE_PLATFORM_NAME)";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-DFOLLY_NO_CONFIG",
+					"-DFOLLY_MOBILE=1",
+					"-DFOLLY_USE_LIBCPP=1",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-Wl",
+					"-ld_classic",
+				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Staging;
+		};
+		508FD6112C00419F00B2FF0E /* Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01A3BD0953A165ED5321481D /* Pods-b7connectrevamp.staging.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = b7connectrevamp/b7connectrevamp.entitlements;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_TEAM = 9ZCGL5NAKF;
+				INFOPLIST_FILE = b7connectrevamp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.2.7;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.b7.b7connects;
+				PRODUCT_NAME = b7connectrevamp;
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Staging;
+		};
+		508FD6122C00419F00B2FF0E /* Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 06348FD720084EBBAF37B0C4 /* Pods-b7connectrevamp-b7connectrevampTests.staging.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COPY_PHASE_STRIP = NO;
+				INFOPLIST_FILE = b7connectrevampTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+					"$(inherited)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/b7connectrevamp.app/b7connectrevamp";
+			};
+			name = Staging;
 		};
 		83CBBA201A601CBA00E9B192 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -786,6 +922,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODEPUSH_KEY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -818,6 +955,7 @@
 					"\"$(inherited)\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
+				Multi_Deployment_Config = "";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_CPLUSPLUSFLAGS = (
@@ -865,6 +1003,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODEPUSH_KEY = "w0nLnGI_zJ75oz38tk3G3ts15jvFyj-7fnITn ";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -893,6 +1032,7 @@
 					"\"$(inherited)\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
+				Multi_Deployment_Config = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
@@ -919,6 +1059,7 @@
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
 				00E356F71AD99517003FC87E /* Release */,
+				508FD6122C00419F00B2FF0E /* Staging */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -928,6 +1069,7 @@
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
 				13B07F951A680F5B00A75B9A /* Release */,
+				508FD6112C00419F00B2FF0E /* Staging */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -937,6 +1079,7 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
+				508FD6102C00419F00B2FF0E /* Staging */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

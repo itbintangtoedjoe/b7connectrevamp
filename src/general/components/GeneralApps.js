@@ -33,32 +33,32 @@ function GeneralApps() {
     return app.isActive && (app.platform == 'both' || app.platform == 'ios');
   }).length;
 
-  const openSensory = () => {
-    // Replace 'com.example.app' with the actual package name of the app on the Play Store
-    const appPackage = 'com.b7.sensoryonline';
+  // const openSensory = () => {
+  //   // Replace 'com.example.app' with the actual package name of the app on the Play Store
+  //   const appPackage = 'com.b7.sensoryonline';
 
-    // Construct the Google Play Store URL
-    const playStoreUrl = `market://details?id=${appPackage}`;
+  //   // Construct the Google Play Store URL
+  //   const playStoreUrl = `market://details?id=${appPackage}`;
 
-    // Check if the Google Play Store app is installed
-    Linking.canOpenURL(playStoreUrl)
-      .then(supported => {
-        if (supported) {
-          // Open the Google Play Store app
-          Linking.openURL(playStoreUrl);
-        } else {
-          // If the Play Store app is not installed, try opening the app using a deep link
-          const deepLink = `yourapp://somepath`; // Replace with the actual deep link or URL scheme
+  //   // Check if the Google Play Store app is installed
+  //   Linking.canOpenURL(playStoreUrl)
+  //     .then(supported => {
+  //       if (supported) {
+  //         // Open the Google Play Store app
+  //         Linking.openURL(playStoreUrl);
+  //       } else {
+  //         // If the Play Store app is not installed, try opening the app using a deep link
+  //         const deepLink = `yourapp://somepath`; // Replace with the actual deep link or URL scheme
 
-          Linking.openURL(deepLink).catch(() => {
-            console.log(
-              `The app is not installed, operation failed: ${deepLink}`,
-            );
-          });
-        }
-      })
-      .catch(error => console.error('An error occurred', error));
-  };
+  //         Linking.openURL(deepLink).catch(() => {
+  //           console.log(
+  //             `The app is not installed, operation failed: ${deepLink}`,
+  //           );
+  //         });
+  //       }
+  //     })
+  //     .catch(error => console.error('An error occurred', error));
+  // };
 
   const content = (
     <View style={styles.appsContainer}>
@@ -87,7 +87,16 @@ function GeneralApps() {
         appColor={Colors.EOPrimary}
         onPress={() => navigation.navigate('EO')}
       />
-      {Platform.OS === 'android' ? (
+      <GeneralApp
+        ionicon
+        app={true}
+        appTitle="Coming Soon"
+        appIcon="apps"
+        appColor={Colors.CAMOrange}
+        iconStyle={{backgroundColor: Colors.secondaryColor}}
+        onPress={() => {}}
+      />
+      {/* {Platform.OS === 'android' ? (
         <GeneralApp
           app={true}
           appTitle="Sensory Online"
@@ -98,7 +107,7 @@ function GeneralApps() {
         />
       ) : (
         <></>
-      )}
+      )} */}
 
       {/* <GeneralApp
         ionicon
@@ -123,15 +132,6 @@ function GeneralApps() {
         appIcon="fast-food"
         appColor={Colors.MakanSiangPrimary}
         onPress={() => console.log('Makan Siang')}
-      />
-      <GeneralApp
-        ionicon
-        app={true}
-        appTitle="More"
-        appIcon="apps"
-        appColor={Colors.secondaryColor}
-        iconStyle={{backgroundColor: Colors.secondaryColor}}
-        onPress={() => console.log('More')}
       /> */}
     </View>
   );

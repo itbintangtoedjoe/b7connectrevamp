@@ -1,6 +1,6 @@
 import React from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {saveUserToken} from '../utils/APIMethods';
+import {SaveUserToken} from '../utils/APIMethods';
 import {Notifications} from 'react-native-notifications';
 
 export const AuthContext = React.createContext({
@@ -82,7 +82,7 @@ function AuthContextProvider({children}) {
     const token = await AsyncStorage.getItem('token');
     // console.log(data.Data.NIK, token);
     if (data.Data.NIK && token) {
-      const responseToken = await saveUserToken(data.Data.NIK, token);
+      const responseToken = await SaveUserToken(data.Data.NIK, token);
     }
   }
 

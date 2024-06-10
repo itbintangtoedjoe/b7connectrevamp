@@ -9,3 +9,4 @@ export {default as ProfileScreen} from './ProfileScreen';
 export {default as RegisterUserScreen} from './RegisterUserScreen';
 export {default as SplashScreen} from './SplashScreen';
 export {default as OTPScreen} from './OTPScreen';
+export {default as UnlinkDeviceScreen} from './UnlinkDeviceScreen';

@@ -8,10 +8,17 @@ export async function NetworkCheck() {
   return response;
 }
 
-export async function Authentication(email, password) {
+export async function Authentication(
+  email,
+  password,
+  devicePlatform = null,
+  userDeviceID = null,
+) {
   const response = await axios.post(
-    'https://portal.bintang7.com/tara/users/get-active-user',
-    {email: email, password: password},
+    //old api
+    // 'https://portal.bintang7.com/tara/users/get-active-user',
+    'https://portal.bintang7.com/tara/b7connect/user-login',
+    {email, password, devicePlatform, userDeviceID},
   );
 
   const responseData = response.data;
@@ -173,7 +180,7 @@ export async function GetBulletins() {
   return response.data;
 }
 
-export async function saveUserToken(nik, token) {
+export async function SaveUserToken(nik, token) {
   const response = await axios.post(
     'https://portal.bintang7.com/tara/users/save-user-token',
     {nik: nik, userToken: token},
@@ -182,10 +189,34 @@ export async function saveUserToken(nik, token) {
   return response.data;
 }
 
-export async function deactivateAccount(nik) {
+export async function DeactivateAccount(nik) {
   const response = await axios.post(
     'https://portal.bintang7.com/tara/b7connect/user-request-deactivation',
     {nik: nik},
+  );
+
+  return response.data;
+}
+
+export async function CheckAppVersion(appVersion, userID, userPlatform) {
+  const response = await axios.post(
+    'https://portal.bintang7.com/tara/b7connect/check-app-version',
+    {
+      appVersion,
+      userID,
+      userPlatform,
+    },
+  );
+
+  return response.data;
+}
+
+export async function UnlinkDevice(email) {
+  const response = await axios.post(
+    'https://portal.bintang7.com/tara/b7connect/unlink-device',
+    {
+      email,
+    },
   );
 
   return response.data;

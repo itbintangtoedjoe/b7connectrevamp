@@ -80,8 +80,8 @@ android {
         applicationId "com.b7.b7connect"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 8
-        versionName "1.2.3"
+        versionCode 12
+        versionName "1.2.7"
     }
     signingConfigs {
         debug {
@@ -102,6 +102,13 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+            //added for codepush
+            resValue "string", "CodePushDeploymentKey", '""'
+        }
+        //added for codepush
+        releaseStaging {
+            resValue "string", "CodePushDeploymentKey", '"ayDcaAZ-HPDSj7Ounc5dPhg9ZUrGXzgNL240n"'
+            matchingFallbacks = ['release']
         }
         release {
             // Caution! In production, you need to generate your own keystore file.
@@ -109,6 +116,9 @@ android {
             signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+
+            //added for codepush
+            resValue "string", "CodePushDeploymentKey", '"_jBPzmS_rCWe1L_EqeKMW4AAH7rstIpxDmImi"'
         }
     }
 }
@@ -135,3 +145,5 @@ dependencies {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+//added
+apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"

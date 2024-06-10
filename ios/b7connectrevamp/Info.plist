@@ -114,5 +114,11 @@
 	<string>Light</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>YES</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>itms-apps</string>
+	</array>
+	<key>CodePushDeploymentKey</key>
+	<string>$(CODEPUSH_KEY)</string>
 </dict>
 </plist>

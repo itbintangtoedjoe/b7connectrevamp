@@ -11,6 +11,7 @@ import {
   Platform,
 } from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
+import DeviceInfo from 'react-native-device-info';
 
 import Colors from '../constants/Colors';
 import Styles from '../constants/Styles';
@@ -18,7 +19,7 @@ import * as GeneralComponents from '../components/GeneralComponents';
 import {
   Authentication,
   AuthenticationEO,
-  saveUserToken,
+  SaveUserToken,
 } from '../utils/APIMethods';
 import {CheckSignInForm, NetworkErrorHandler} from '../utils/HelperMethods';
 import {AuthContext} from '../context/auth-context';
@@ -29,7 +30,7 @@ import Strings from '../constants/Strings';
 
 function AuthenticationScreen({navigation}) {
   const authCtx = React.useContext(AuthContext);
-  const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
+  // const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [isAuthenticating, setIsAuthenticating] = React.useState(false);
@@ -44,13 +45,20 @@ function AuthenticationScreen({navigation}) {
     }, []),
   );
 
-  function passwordVisibilityHandler() {
-    if (isPasswordVisible) {
-      setIsPasswordVisible(false);
-    } else if (!isPasswordVisible) {
-      setIsPasswordVisible(true);
-    }
-  }
+  // React.useEffect(() => {
+  //   DeviceInfo.getUniqueId().then(uniqueId => {
+  //     setUniqueDeviceID(uniqueId);
+  //     console.log(Platform.OS, uniqueId);
+  //   });
+  // }, []);
+
+  // function passwordVisibilityHandler() {
+  //   if (isPasswordVisible) {
+  //     setIsPasswordVisible(false);
+  //   } else if (!isPasswordVisible) {
+  //     setIsPasswordVisible(true);
+  //   }
+  // }
 
   function updateInputValueHandler(inputType, enteredValue) {
     switch (inputType) {
@@ -62,26 +70,66 @@ function AuthenticationScreen({navigation}) {
         break;
     }
   }
+  async function getDeviceUniqueID() {
+    try {
+      const uniqueId = await DeviceInfo.getUniqueId();
+      return uniqueId;
+    } catch (error) {
+      console.error('Error getting unique ID:', error);
+      return error; // or handle the error appropriately
+    }
+  }
 
   async function signInHandler() {
     setIsAuthenticating(true);
+
+    const uniqueDeviceID = await getDeviceUniqueID();
+    // console.log('uniq2: ', uniqueDeviceID);
+    if (!uniqueDeviceID) {
+      Alert.alert(
+        'Authentication Failed',
+        'App failed to get device ID. Please try again. If the problem persists, please contact the IT support team.',
+      );
+      setIsAuthenticating(false);
+      return;
+    }
+
     const checkValidity = await CheckSignInForm(email, password);
+    // console.log('uniqueDeviceID: ', uniqueDeviceID);
     if (checkValidity === 'Valid') {
       try {
-        const response = await Authentication(email, password);
-        console.log(response.Message);
+        const response = await Authentication(
+          email,
+          password,
+          Platform.OS.toUpperCase(),
+          uniqueDeviceID,
+        );
         if (response.Status === false) {
           setIsAuthenticating(false);
-          if (response.Message == 'not active') {
+          if (response.Message == Strings.noAccessMessage) {
             Alert.alert(
-              'Authentication failed',
+              'Authentication Failed',
+              'There is no account registered with that email',
+            );
+          } else if (response.Message == Strings.inactiveAccountMessage) {
+            Alert.alert(
+              'Authentication Failed',
               'Your account is inactive. Please contact the IT support team.',
             );
-          } else {
+          } else if (response.Message == Strings.differentDeviceMessage) {
             Alert.alert(
-              'Authentication failed',
-              "Your email or password doesn't match",
+              'Different Device Detected',
+              "Your account is linked to another device. If you want to unlink and gain access from this device, please click on the 'Unlink device' button link below.",
             );
+          } else if (response.Message == Strings.invalidPasswordMessage) {
+            const desc = response.Description.toString();
+            if (desc.includes('unlock')) {
+              Alert.alert('Account is Locked', response.Description);
+            } else {
+              Alert.alert('Incorrect password', response.Description);
+            }
+          } else {
+            Alert.alert('Error occured', response.Message.toString());
           }
           return;
         } else if (response.Status === true) {
@@ -203,6 +251,19 @@ function AuthenticationScreen({navigation}) {
                 onChange={passwordVisibilityHandler}
               /> */}
             </View>
+            <View style={styles.resetDeviceContainer}>
+              <GeneralComponents.PressableText
+                onPress={() => navigation.navigate('UnlinkDevice')}
+                textStyle={{
+                  textDecorationLine: 'underline',
+                  marginBottom: Platform.OS === 'ios' ? 0 : -4,
+                }}>
+                Unlink device
+              </GeneralComponents.PressableText>
+              {/* <GeneralComponents.PasswordToggle
+                onChange={passwordVisibilityHandler}
+              /> */}
+            </View>
             {!isAuthenticating && (
               <GeneralComponents.Button onPress={signInHandler}>
                 Sign in
@@ -276,6 +337,13 @@ const styles = StyleSheet.create({
   },
   forgotToggleContainer: {
     //borderWidth: 1,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  resetDeviceContainer: {
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
